@@ -1,0 +1,103 @@
+/// <reference path="../globals/_scut.scss" />
+/// <reference path="../globals/_variables.scss" />
+#orchid-content {
+  .icon {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    &.icon-iris {
+      @include bgImage('#{$path}icon/icon-iris.png?$ORIGIN_PNG$', center center, 100% auto);
+    }
+    &.icon-camera {
+      @include bgImage('#{$path}icon/icon-camera.png?$ORIGIN_PNG$', center center, 100% auto);
+    }
+    &.icon-screen {
+      @include bgImage('#{$path}icon/icon-screen.png?$ORIGIN_PNG$', center center, auto 100%);
+    }
+    &.icon-arrow-left {
+      @include bgImage('#{$path}icon/icon-arrow-left.png?$ORIGIN_PNG$', center center, 100% 100%);
+    }
+    &.icon-arrow-right {
+      @include bgImage('#{$path}icon/icon-arrow-right.png?$ORIGIN_PNG$', center center, 100% 100%);
+    }
+    &.icon-arrow-left-white {
+      @include bgImage('#{$path}icon/icon-arrow-left-white.png?$ORIGIN_PNG$', center center, 100% 100%);
+    }
+    &.icon-arrow-right-white {
+      @include bgImage('#{$path}icon/icon-arrow-right-white.png?$ORIGIN_PNG$', center center, 100% 100%);
+    }
+    &.icon-arrow-down-white {
+      @include bgImage('#{$path}icon/icon-arrow-down-white.png?$ORIGIN_PNG$', center center, 100% 100%);
+    }
+  }
+  .btn {
+    @include transition();
+    @include font-size($content-fonts);
+    min-width: 150px;
+    border-radius: 22px;
+    padding: 12px 30px 8px;
+    font-family: 'iCielSamsungSharpSans-Bold';
+  }
+  button,
+  a,
+  select {
+    &:active,
+    &:focus {
+      outline: none !important;
+    }
+  }
+  .btn-default {
+    background-color: transparent;
+    &:hover {
+      background-color: rgba(#000, .1);
+    }
+  }
+  .btn-transparent {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: rgba(#000, .5);
+      color: #fff;
+    }
+  }
+  .btn-white {
+    background-color: #fff;
+    color: #000;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $color-primary;
+      color: #fff;
+    }
+  }
+  .btn-primary {
+    background-color: $color-primary;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $color-primary-darker;
+    }
+  }
+}
+
+.with-ie #orchid-content .icon {
+  
+}
+
+.btn {
+  &.hidden-sm {
+    display: none;
+  }
+
+  @include respondTo(tabletPortrait) {
+    &.hidden-xs {
+      display: none;
+    }
+    &.hidden-sm {
+      display: none;
+    }
+  }
+}

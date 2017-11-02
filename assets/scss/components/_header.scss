@@ -1,0 +1,142 @@
+/// <reference path="../globals/_scut.scss" />
+/// <reference path="../globals/_variables.scss" />
+#orchid-content {
+  $topHeight: 50px;
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+    &.fixed {
+      position: fixed;
+    }
+    .btn {
+      height: $topHeight;
+      border-radius: 0;
+      padding: 12px 60px 8px;
+    }
+    .bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 70px;
+      height: 3px;
+      background-color: $color-primary;
+      @include transition(all .4s ease-out);
+    }
+  }
+  .top-nav {
+    background-color: #202425;
+    height: $topHeight;
+  }
+  .bottom-nav {
+    background-color: #000;
+    .navbar {
+      margin: 0;
+      border: none;
+      min-height: 0;
+    }
+  }
+  .navbar-nav {
+    &>li {
+      &>a {
+        padding: 10px 15px 6px;
+        // @include font-size($content-fonts);
+        font-size: 13px;
+        color: #fff;
+        font-family: 'SamsungOne';
+        font-weight: bold;
+        // border-bottom: 3px solid transparent;
+        @include transition();
+      }
+      &.active > a,
+      & > a:hover,
+      & > a:active,
+      & > a:focus {
+        // border-bottom-color: $color-primary;
+        background-color: transparent;
+      }
+    }
+  }
+  .logo {
+    display: inline-block;
+    height: 20px;
+    margin-top: 15px;
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+  .navbar-collapse {
+    padding: 0;
+    margin-left: -15px;
+  }
+  .navbar-toggle {
+    color: #fff;
+    font-size: 30px;
+    margin: 0;
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  @include respondTo(tablet) {
+    .navbar-nav>li>a {
+      padding-left: 8px;
+      padding-right: 8px;
+      font-size: 12px;
+    }
+  }
+  @include respondTo(tabletPortrait) {
+    header {
+      // background-color: #000;
+      .bar {
+        display: none;
+      }
+    }
+    .top-nav {
+      height: $nav-height-mobile;
+    }
+    .bottom-nav {
+      background-color: #202425;
+      margin-top: -1px;
+      .container,
+      .navbar {
+        &:before,
+        &:after {
+          content: none;
+        }
+      }
+      .navbar {
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+    }
+    .logo {
+      height: 20px;
+      margin-top: 20px;
+    }
+    .navbar-collapse {
+      margin: 0;
+      width: 100%;
+      border: none;
+      @include prefix(box-shadow, none);
+    }
+    .navbar-nav {
+      margin: 0;
+      background-color: #000;
+      &>li>a {
+        padding: 10px 30px;
+        border-bottom: none;
+      }
+      & > li + li > a {
+        border-top: 1px solid #444;
+      }
+      .btn {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

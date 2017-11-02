@@ -1,0 +1,29 @@
+@media (min-width: 768px) {
+	#content .navbar-nav>li>a {
+    padding-bottom: 7px !important;
+}
+}
+
+ @media (max-width: 480px) {
+ 	#content {
+	 	.part-content {
+		    padding: 30px ;
+		}
+	}
+ }
+	
+ 
+@media (max-width: 370px) { 
+  #content {
+    .tbl-spec{
+      th {
+        width: 130px;
+      }
+    }
+  }
+}
+
+#main-nav {
+	background: #fff;
+	min-height: 52px !important; 
+}

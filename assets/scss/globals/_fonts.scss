@@ -1,0 +1,27 @@
+
+@for $i from 2 through 8 {
+  @font-face {
+    font-family: "SamsungOne";
+    src: url("fonts/SamsungOne/SamsungOne-" + $i + "00.woff") format("woff"), 
+      url("fonts/SamsungOne/SamsungOne-" + $i + "00.ttf");
+    font-weight: $i * 100;
+  }
+}
+
+@font-face {
+  font-family: "SamsungSharp";
+  src: url("fonts/iCielSamsungSharpSansRegular.woff") format("woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "SamsungSharp";
+  src: url("fonts/iCielSamsungSharpSans-Medium.woff") format("woff");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "SamsungSharp";
+  src: url("fonts/iCielSamsungSharpSans-Bold.woff") format("woff");
+  font-weight: 800;
+}

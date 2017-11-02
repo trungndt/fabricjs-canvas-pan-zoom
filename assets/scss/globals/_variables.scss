@@ -1,0 +1,69 @@
+// Color set
+$gray: #777;
+$blue: #1428a0;
+$lightBlue: #0075c5;;
+$cyan: #00b3e3;
+$color-default: $gray;
+$color-default-lighter: lighten($gray, 10%);
+$color-main: $blue;
+$color-primary: $lightBlue;
+$color-primary-darker: darken($color-primary, 5%);
+$color-primary-lighter: $cyan;
+
+//Font
+$font-size: 14px;
+
+//common variables
+
+$giant-fonts: (
+  null: 90px,
+  $mdDesktop: 50px,
+  $xsDesktop: 30px,
+  $largeScreen: 110px
+);
+
+$xlg-fonts: (
+  null: 60px,
+  $mdDesktop: 45px,
+  $xsDesktop: 40px,
+  $largeScreen: 80px
+);
+
+$lg-fonts: (
+  null: 46px,
+  $mdDesktop: 40px,
+  $xsDesktop: 28px,
+  $largeScreen: 55px
+);
+
+$md-fonts: (
+  null: 30px,
+  $mdDesktop: 25px,
+  $xsDesktop: 20px,
+  $largeScreen: 40px
+);
+
+$sm-fonts: (
+  null: 18px,
+  $mdDesktop: 16px,
+  $xsDesktop: 15px,
+  // $tabletPortrait: 13px,
+  $largeScreen: 24px
+);
+
+$next-fonts: (
+  null: 24px,
+  $mdDesktop: 22px,
+  $xsDesktop: 20px,
+  $largeScreen: 28px
+);
+
+$content-fonts: (
+  null: 14px,
+  $mdDesktop: 13px,
+  $xsDesktop: 12px,
+  $largeScreen: 16px
+);
+
+$nav-height-mobile: 60px;
+$path: 'assets/images/';

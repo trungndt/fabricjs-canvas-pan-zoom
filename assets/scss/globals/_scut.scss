@@ -1,0 +1,378 @@
+﻿/*============================================================================
+  #General Variables
+==============================================================================*/
+%clearfix {
+	*zoom: 1;
+	&:after {
+		content: '';
+		display: table;
+		line-height: 0;
+		clear: both;
+	}
+}
+
+/*============================================================================
+  #Mixin
+==============================================================================*/
+@mixin prefix($property, $value) {
+	-webkit-#{$property}: #{$value};
+	-moz-#{$property}: #{$value};
+	-ms-#{$property}: #{$value};
+	-o-#{$property}: #{$value};
+	#{$property}: #{$value};
+}
+
+@mixin transition($transition: all 0.2s) {
+	@include prefix('transition', #{$transition});
+}
+
+@mixin gradient($from, $to, $fallback, $start, $end) {
+	background: $fallback;
+	background: -moz-linear-gradient($start, $from 0, $to 100%);
+	// background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $from), color-stop(100%, $to));
+	background: -webkit-linear-gradient($start, $from 0, $to 100%);
+	background: -o-linear-gradient($start, $from 0, $to 100%);
+	background: -ms-linear-gradient($start, $from 0, $to 100%);
+	background: linear-gradient($start $end, $from 0, $to 100%);
+}
+
+@mixin keyframes($animationName) {
+	@-webkit-keyframes #{$animationName} {
+		@content;
+	}
+	@-moz-keyframes #{$animationName} {
+		@content;
+	}
+	@-o-keyframes #{$animationName} {
+		@content;
+	}
+	@keyframes #{$animationName} {
+		@content;
+	}
+}
+
+@mixin animation($name, $duration: 1000ms, $iterations: infinite, $timing-function: ease, $delay: 0ms) {
+	@include prefix(animation, $name $duration $iterations $timing-function $delay);
+}
+
+@mixin ghostVerticalAlign() {
+	&:before {
+		content: '';
+		display: inline-block;
+		vertical-align: middle;
+		height: 100%;
+		width: .1px;
+	}
+}
+$headerText: 16px;
+@function color-control($color) {
+	@if (lightness( $color ) > 48) {
+		@return $headerText;
+	} @else {
+		@return #fff;
+	}
+}
+
+// Breakpoints for each query
+
+// Breakpoints for each query
+$smartphone: 480px;
+$tabletPortrait: 767px;
+$tabletLandscape: 1023px;
+$xsDesktop: 1100px;
+$smDesktop: 1200px;
+$mdDesktop: 1280px;
+// $desktop: 1174px;
+$largeScreen: 1599px;
+$hdScreen: 1799px;
+
+
+// $maxPhoneSize: 767px;
+// $minTabletSize: $maxPhoneSize + 1px;
+// $maxTabletSize: 1100px;
+// $minIpadSize: 768px;
+// $minDesktopSize: 1200px;
+// $minHDSize: 1599px;
+
+
+@mixin respondTo($media) {
+	@if $media == smallScreen {
+		@media (max-width: $xsDesktop) {
+			@content;
+		}
+	} @else if $media == tablet {
+		@media (max-width: $tabletLandscape) {
+			@content;
+		}
+	} @else if $media == tabletPortrait {
+		@media (max-width: $tabletPortrait) {
+			@content;
+		}
+	} @else if $media == smartphone {
+		@media (max-width: $smartphone) {
+			@content;
+		}
+	} @else if $media == smDesktop {
+		@media (max-width: $smDesktop) {
+			@content;
+		}
+	} @else if $media == desktop {
+		@media (max-width: $mdDesktop) {
+			@content;
+		}
+	} @else if $media == largeScreen {
+		@media (min-width: $largeScreen) {
+			@content;
+		}
+	} @else if $media == hd {
+		@media (min-width: $hdScreen) {
+			@content;
+		}
+	}
+}
+
+@mixin font-size($fs-map) {
+  $commonScreen: 1366px;
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      font-size: $fs-font-size;
+    } 
+    @else if $fs-breakpoint <= $commonScreen {
+      @media (max-width: $fs-breakpoint) {
+        font-size: $fs-font-size;
+      }
+    }
+    @else {
+      @media (min-width: $fs-breakpoint) {
+        font-size: $fs-font-size;
+      }
+    }
+  }
+}
+/*
+$xlg-fonts: (
+  null: 120px,
+  $mdDesktop: 100px,
+  $smDesktop: 90px,
+  $xsDesktop: 80px,
+  $largeScreen: 160px
+);
+
+$lg-fonts: (
+  null: 51px,
+  $mdDesktop: 45px,
+  $xsDesktop: 40px,
+  $largeScreen: 72px
+);
+
+$md-fonts: (
+  null: 40px,
+  $mdDesktop: 35px,
+  $xsDesktop: 28px,
+  $largeScreen: 60px
+);
+
+$sm-fonts: (
+  null: 26px,
+  $mdDesktop: 22px,
+  $xsDesktop: 19px,
+  $largeScreen: 40px
+);
+
+$xs-fonts: (
+  null: 17px,
+  $mdDesktop: 15px,
+  $xsDesktop: 14px,
+  $largeScreen: 24px
+);
+
+$content-fonts: (
+  null: 14px,
+  $mdDesktop: 13px,
+  $xsDesktop: 11px,
+  $largeScreen: 16px
+);
+*/
+
+// Tooltips
+@mixin hui_tooltip($content: attr(data-tooltip), $direction: top) {
+	position: relative;
+	&:before, &:after {
+		display: none;
+		z-index: 98;
+	}
+	&:hover {
+		&:after { // for text bubble
+			content: $content;
+			display: block;
+			position: absolute;
+			height: 12px; // (makes total height including padding 22px)
+			padding: 6px;
+			font-size: 12px;
+			white-space: nowrap;
+			color: #fff;
+			@include text-shadow(1px 1px #000);
+			background-color: #222;
+		}
+		@if ($direction == 'top') {
+			&:before {
+				@include triangle(down, 6px, #222);
+				top: -6px;
+				margin-top: 0;
+				left: 47%;
+			}
+			&:after {
+				top: -28px;
+				left: 47%;
+				margin-left: -20px;
+			}
+		} @else if ($direction == 'bottom') {
+			&:before {
+				@include triangle(up, 6px, #222);
+				top: auto;
+				margin-top: 0;
+				bottom: -6px;
+				left: 47%;
+			}
+			&:after {
+				bottom: -28px;
+				left: 47%;
+				margin-left: -20px;
+			}
+		}
+	}
+}
+
+// Set background image with default values
+@mixin bgImage($url : '', $position : center, $size : cover, $repeat: no-repeat) {
+	background: url($url) $position / $size $repeat;
+}
+
+/*
+* @include triangle within a pseudo element and add positioning properties (ie. top, left)
+* $direction: up, down, left, right
+*/
+@mixin triangle($direction, $height: 6px, $size: 6px, $color: #222) {
+	content: '';
+	display: block;
+	position: absolute;
+	height: 0;
+	width: 0;
+	@if ($direction == 'up') {
+		border-bottom: $height solid $color;
+		border-left: $size solid transparent;
+		border-right: $size solid transparent;
+	} @else if ($direction == 'down') {
+		border-top: $height solid $color;
+		border-left: $size solid transparent;
+		border-right: $size solid transparent;
+	} @else if ($direction == 'left') {
+		border-top: $size solid transparent;
+		border-bottom: $size solid transparent;
+		border-right: $height solid $color;
+	} @else if ($direction == 'right') {
+		border-top: $size solid transparent;
+		border-bottom: $size solid transparent;
+		border-left: $height solid $color;
+	}
+}
+
+@mixin faIcon($clsName) {
+	&:before {
+		display: inline-block;
+		font: normal normal normal 14px/1 FontAwesome;
+		font-size: inherit;
+		text-rendering: auto;
+		@include prefix(font-smoothing, antialiased);
+
+		@if ($clsName == 'angle-left') {
+			content: '\f104';
+		}
+	}
+}
+
+/*============================================================================
+  #Render Helping classes
+==============================================================================*/
+
+$minSpace: 0;
+$maxSpace: 20;
+$clsTypes: ('m':'margin', 'p':'padding');
+$directions: ('t':'top', 'r':'right', 'b':'bottom', 'l':'left');
+
+@each $tKey, $tVal in $clsTypes {
+	@each $dKey, $dVal in $directions {
+		@for $i from $minSpace through $maxSpace {
+			.#{$tKey}#{$dKey}-#{$i*5} {
+				#{$tVal}-#{$dVal}: $i * 5px !important;
+			}
+		}
+	}
+}
+
+@mixin ratioWrapper($X, $Y) {
+	position: relative;
+	&:before {
+		content: '';
+		display: block;
+		padding-top: percentage($Y / $X);
+	}
+
+	& > *:first-child {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+	}
+}
+
+.vertical-center,
+.horizontal-center {
+	position: absolute;
+}
+.vertical-center {
+	top: 50%;
+	@include prefix(transform, translateY(-50%));
+}
+.horizontal-center {
+	left: 50%;
+	@include prefix(transform, translateX(-50%));
+}
+
+.absolute-center {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	@include prefix(transform, translate(-50%, -50%));
+}
+
+.iframe-container {
+	@include ratioWrapper(560, 315);
+}
+
+.d-tbl {
+	display: table;
+	width: 100%;
+	height: 100%;
+	.d-tbl-cell {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+
+@mixin clearLink($color: #000) {
+	color: $color;
+	&:hover,
+	&:active,
+	&:focus {
+		text-decoration: none;
+		color: $color;
+	}
+}
